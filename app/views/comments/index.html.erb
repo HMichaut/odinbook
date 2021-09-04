@@ -1,0 +1,38 @@
+<%= render 'searchform', project_options: @project_options %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Id</th> 
+      <th>Project</th>
+      <th>Vessel</th>
+      <th>Category</th>
+      <th>Issued by</th>
+      <th>Status</th>
+      <th>Creation date</th>
+      <th>Closing date</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th colspan="10"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comments.each do |comment| %>
+      <tr>
+        <td><%= link_to comment.id, comment %></td>
+        <td><%= comment.project.reference %></td>
+        <td><%= comment.vessel.nil? ? nil : comment.vessel.hull_number %></td>
+        <td><%= comment.category.reference %></td>
+        <td><%= comment.user.username %></td>
+        <td><%= comment.status ? 'Closed' : 'Open' %></td>
+        <td><%= comment.created_at.strftime("%d/%m/%Y") %></td>
+        <td><%= comment.closing_date.nil? ? nil : comment.closing_date.strftime("%d/%m/%Y") %></td>
+        <td><%= comment.title %></td>
+        <td><%= comment.body %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New Comment', new_comment_path(comment: @comment) %>

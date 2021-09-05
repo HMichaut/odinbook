@@ -14,22 +14,37 @@
           <strong><%= post.user.email %></strong><br/>
           <p><%= post.body %></p>
         </div>
-        <% if user_signed_in? %>
-          <nav class="level">
-            <div class="level-left is-mobile">
+        <nav class="level">
+          <div class="level-left is-mobile">
+            <% if current_user == post.user %>
+                
               <%= link_to post, class: "level-item" do %>
                 <span class="icon"><i class="fa fa-link" aria-hidden="true"></i></span>
               <% end %>
+
               <%= link_to edit_post_path(post), class: "level-item" do %>
                 <span class="icon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
               <% end %>
+
               <%= link_to post, method: :delete, data: { confirm: "Are you sure you want to delete this post?"
               } do %>
                 <span class="icon"><i class="fa fa-trash-o" aria-hidden="true"></i></span>
               <% end %>
-            </div>
-          </nav>
-        <% end %>
+                
+            <% else %>
+
+              <%= link_to likes_path(user_id: current_user.id, post_id: post.id), method: :post, data: { confirm: "Like this post?"
+                  } do %>
+                <div class="notif-icon">
+                  <span class="icon"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span>
+                  <div class="like-txt"><%= Like.where(post_id: post.id).length %></div>
+                </div>
+              <% end %>
+
+            <% end %>
+          </div>
+        </nav>
+
       </div>
     </article>
   </div>

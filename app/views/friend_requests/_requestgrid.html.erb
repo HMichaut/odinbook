@@ -1,0 +1,27 @@
+<% @friend_requests.each do | friend_request | %>
+  <div class="box">
+    <article class="media">
+      <div class="media-content">
+        <div class="content">
+          <strong><%= friend_request.sender.email %></strong><br/>
+        </div>
+
+
+        <nav class="level">
+          <div class="level-left is-mobile">
+            <div class="level-left is-mobile">
+              <%= link_to friend_relationships_path(user_id: current_user.id, friend_id: friend_request.sender.id, friend_request_id: friend_request.id), method: :post, data: { confirm: "Approve friend request ?"
+                } do %>
+                  <span class="icon"><i class="fa fa-check" aria-hidden="true"></i></span>
+                <% end %>
+            </div>
+          </div>
+        </nav>
+
+
+
+      </div>
+    </article>
+  </div>
+<% end %>
+        

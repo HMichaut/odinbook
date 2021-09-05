@@ -1,4 +1,9 @@
 class FriendRequestsController < ApplicationController
+
+  def index
+    @friend_requests = FriendRequest.where(receiver_id: current_user.id)
+  end
+
   def new
     @friend_request = FriendRequest.new
   end
@@ -10,6 +15,10 @@ class FriendRequestsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def destroy
+    FriendRequest.find(params[:id]).destroy
   end
 
   private

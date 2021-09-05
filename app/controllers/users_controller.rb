@@ -4,7 +4,10 @@ class UsersController < ApplicationController
   def index
     @users = User.where.not(id: current_user.id)
     @friend_request_array = current_user.sent_friend_requests.map{ |u| u.receiver_id }
-    @friend_array = current_user.friends.map{ |u| u.friend_id }
+    @friend_array = current_user.friends.map{ |u| u.user_id }
+    puts "FRIEND ARRAy !!!!!!!!!!!!"
+    p @friend_array
+
   end
 
   def show

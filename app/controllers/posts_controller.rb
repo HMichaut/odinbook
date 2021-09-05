@@ -2,7 +2,9 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
 
   def index
-    @posts = Post.all.order("created_at DESC")
+    check_array = [current_user.id].concat(current_user.friends.map{ |u| u.id })
+    @posts = Post.where(user_id: check_array).order("created_at DESC").limit(10)
+    @likes_array = Like.where(user_id: current_user.id).map{ |u| u.post_id }
     @post = Post.new
     @comment = Comment.new
   end

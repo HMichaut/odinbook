@@ -9,11 +9,7 @@ class FriendRequestsController < ApplicationController
 
   def create
     @friend_request = FriendRequest.new(sender_id: friend_request_params[:sender_id], receiver_id: friend_request_params[:receiver_id])
-    if @friend_request.save
-      redirect_to users_path
-    else
-      render :new
-    end
+    redirect_to users_path if @friend_request.save
   end
 
   def destroy

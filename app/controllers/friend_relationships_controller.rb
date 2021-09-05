@@ -14,8 +14,6 @@ class FriendRelationshipsController < ApplicationController
     if @friend_relationship_1.save && @friend_relationship_2.save
       FriendRequest.find(friend_relationship_params[:friend_request_id]).destroy
       redirect_to friend_requests_path
-    else
-      render :new
     end
   end
 

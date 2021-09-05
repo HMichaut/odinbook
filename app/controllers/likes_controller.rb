@@ -5,11 +5,7 @@ class LikesController < ApplicationController
 
   def create
     @like = Like.new(post_id: like_params[:post_id], user_id: like_params[:user_id])
-    if @like.save
-      redirect_to posts_path
-    else
-      render :new
-    end
+    redirect_to posts_path if @like.save
   end
 
   private

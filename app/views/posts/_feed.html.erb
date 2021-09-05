@@ -45,6 +45,19 @@
           </div>
         </nav>
 
+        <% post.comments.each do | comment | %>
+          <div class="box">
+            <strong><%= comment.user.email %></strong><br/>
+            <p><%= comment.body %></p>
+          </div>
+        <% end %>
+
+        <article class="media box">
+          <div class="media-content">
+            <%= render 'commentform', post_id: post.id %>
+          </div>
+        </article>
+
       </div>
     </article>
   </div>

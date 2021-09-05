@@ -1,13 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[ show edit update destroy ]
 
-  def index
-    @comments = Comment.all
-  end
-
-  def show
-  end
-
   def new
     @comment = Comment.new
   end
@@ -16,20 +9,12 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = Comment.new(comment_params)
-    if @comment.save
-      redirect_to @comment
-    else
-      render :new
-    end
+    @comment = current_user.comments.build(comment_params)
+    redirect_to posts_path if @comment.save
   end
 
   def update
-    if @comment.update(comment_params)
-      redirect_to @comment
-    else
-      render :edit
-    end
+    redirect_to posts_path if @comment.update(comment_params)
   end
 
   def destroy

@@ -1,0 +1,30 @@
+<% @users.each do | user | %>
+  <div class="box">
+    <article class="media">
+      <div class="media-content">
+        <div class="content">
+          <strong><%= user.email %></strong><br/>
+        </div>
+
+        <nav class="level">
+          <div class="level-left is-mobile">
+            <div class="level-left is-mobile">
+              <% if @friend_request_array.include?(user.id) %>
+                <p>Friend request sent</p>
+              <% elsif @friend_array.include?(user.id) %>
+                <p>Friend</p>
+              <% else %>
+                <%= link_to friend_requests_path(sender_id: current_user.id, receiver_id: user.id), method: :post, data: { confirm: "Send friend request ?"
+                } do %>
+                  <span class="icon"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </nav>
+
+      </div>
+    </article>
+  </div>
+<% end %>
+        

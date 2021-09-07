@@ -62,3 +62,5 @@ gem "bulma-rails", "~> 0.9.1"
 gem 'simple_form'
 
 gem "font-awesome-rails"
+
+gem "image_processing", "~> 1.0"

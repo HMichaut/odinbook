@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show ]
+  before_action :set_user, only: %i[ show edit ]
 
   def index
     @users = User.where.not(id: current_user.id)
@@ -8,6 +8,10 @@ class UsersController < ApplicationController
   end
 
   def show
+    @posts = Post.where(user_id: [:id]).order("created_at DESC")
+  end
+
+  def edit
   end
 
   private

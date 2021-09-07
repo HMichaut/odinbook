@@ -10,4 +10,5 @@ class User < ApplicationRecord
   has_many :received_friend_requests, foreign_key: "receiver_id", class_name: "FriendRequest"
   has_many :friend_relationships
   has_many :friends, foreign_key: "friend_id", class_name: "FriendRelationship"
+  has_one_attached :image
 end

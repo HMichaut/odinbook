@@ -1,14 +1,32 @@
 <div class="column is-half">
   <article class="media box">
+    <figure>
+      <% if current_user.image.attached? %>
+        <%= image_tag current_user.image.variant(resize: "64x64!"), class: "image" %>
+      <% else %>
+          <%= image_tag("user.png", class: "image", size: "64x64",) %>
+      <% end %>
+    </figure>
     <div class="media-content">
       <%= render 'form' %>
     </div>
   </article>
 
-
 <% @posts.each do | post | %>
   <div class="box">
     <article class="media">
+      <div class="media-left">
+        <figure>
+          <%= link_to post.user, class: "level-item" do %>
+                <% if post.user.image.attached? %>
+                  <%= image_tag post.user.image.variant(resize: "64x64!"), class: "image" %>
+                <% else %>
+                    <%= image_tag("user.png", class: "image", size: "64x64",) %>
+                <% end %>
+          <% end %>
+        </figure>
+      </div>
+
       <div class="media-content">
         <div class="content">
           <strong><%= post.user.email %></strong><br/>

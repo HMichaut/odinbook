@@ -64,3 +64,5 @@ gem 'simple_form'
 gem "font-awesome-rails"
 
 gem "image_processing", "~> 1.0"
+
+gem 'omniauth-google-oauth2'

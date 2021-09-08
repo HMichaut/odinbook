@@ -9,8 +9,6 @@ class UsersController < ApplicationController
 
   def show
     @posts = Post.where(user_id: params[:id]).order("created_at DESC")
-    puts "POSTS !!!!!!!!!"
-    p @posts
     @post = Post.new
     @comment = Comment.new
     @likes_array = Like.where(user_id: current_user.id).map{ |u| u.post_id }

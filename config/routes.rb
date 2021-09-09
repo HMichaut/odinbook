@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, controllers: { registrations: 'registrations' }
+  devise_scope :user do
+    get 'login', to: 'devise/sessions#new'
+  end
+  devise_scope :user do
+    get 'singup', to: 'devise/registrations#new'
+  end
   resources :comments
   resources :friend_relationships
   resources :friend_requests

@@ -10,6 +10,8 @@ class PostsController < ApplicationController
   end
 
   def show
+    @comment = Comment.new
+    @likes_array = Like.where(user_id: current_user.id).map{ |u| u.post_id }
   end
 
   def new

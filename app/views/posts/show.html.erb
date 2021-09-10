@@ -1,0 +1,75 @@
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-half">
+ 
+        <div class="box">
+          <article class="media">
+            <div class="media-left">
+              <figure>
+                <%= link_to @post.user, class: "level-item" do %>
+                  <% if @post.user.image.attached? %>
+                    <%= image_tag @post.user.image.variant(resize: "64x64!"), class: "image" %>
+                  <% else %>
+                      <%= image_tag("user.png", class: "image", size: "64x64",) %>
+                  <% end %>
+                <% end %>
+              </figure>
+            </div>
+
+            <div class="media-content">
+              <div class="content">
+                <strong><%= @post.user.name %></strong><br/>
+                <p><%= @post.body %></p>
+              </div>
+              <nav class="level">
+                <div class="level-left is-mobile">
+                  <% if current_user == @post.user %>
+
+                    <%= link_to edit_post_path(@post), class: "level-item" do %>
+                      <span class="icon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                    <% end %>
+
+                    <%= link_to @post, method: :delete, data: { confirm: "Are you sure you want to delete this post?"
+                    } do %>
+                      <span class="icon"><i class="fa fa-trash-o" aria-hidden="true"></i></span>
+                    <% end %>
+                      
+                  <% elsif @likes_array.include?(@post.id) %>
+                    <div class="notif-icon">
+                      <span class="icon"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span>
+                      <div class="like-txt"><%= Like.where(post_id: post.id).length %></div>
+                    </div>
+
+                  <% else %>
+                    <%= link_to likes_path(user_id: current_user.id, post_id: @post.id), method: :post, data: { confirm: "Like this post?"
+                        } do %>
+                      <div class="notif-icon">
+                        <span class="icon"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span>
+                        <div class="like-txt"><%= Like.where(post_id: @post.id).length %></div>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              </nav>
+
+              <% @post.comments.each do | comment | %>
+                <div class="box">
+                  <strong><%= comment.user.name %></strong><br/>
+                  <p><%= comment.body %></p>
+                </div>
+              <% end %>
+
+              <article class="media box">
+                <div class="media-content">
+                  <%= render 'posts/commentform', post_id: @post.id %>
+                </div>
+              </article>
+
+            </div>
+          </article>
+        </div>
+    </div>
+    </div>
+  </div>
+</section>

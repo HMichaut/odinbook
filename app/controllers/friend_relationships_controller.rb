@@ -13,7 +13,7 @@ class FriendRelationshipsController < ApplicationController
     @friend_relationship_2 = FriendRelationship.new(friend_id: friend_relationship_params[:user_id], user_id: friend_relationship_params[:friend_id])
     if @friend_relationship_1.save && @friend_relationship_2.save
       FriendRequest.find(friend_relationship_params[:friend_request_id]).destroy
-      redirect_to friend_requests_path
+      redirect_to users_path
     end
   end
 

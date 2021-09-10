@@ -38,7 +38,7 @@
                   <% elsif @likes_array.include?(@post.id) %>
                     <div class="notif-icon">
                       <span class="icon"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span>
-                      <div class="like-txt"><%= Like.where(post_id: post.id).length %></div>
+                      <div class="like-txt"><%= Like.where(post_id: @post.id).length %></div>
                     </div>
 
                   <% else %>
